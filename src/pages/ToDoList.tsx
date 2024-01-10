@@ -1,10 +1,12 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { atom, useRecoilState } from "recoil";
 import styled from "styled-components";
 
 const TodoWrap = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto;
   padding: 60px 40px;
@@ -14,104 +16,54 @@ const TodoWrap = styled.div`
     flex-direction: column;
   }
 `;
-// function ToDoList() {
-//   const [toDo, setToDo] = useState("");
-//   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
-//     const {
-//       currentTarget: { value },
-//     } = event;
-//     setToDo(value);
-//   };
-//   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-//     event.preventDefault();
-//     console.log(toDo);
-//   };
-//   return (
-//     <>
-//       <form onSubmit={onSubmit}>
-//         <input onChange={onChange} value={toDo} placeholder="Write a to do" />
-//         <button>Add</button>
-//       </form>
-//     </>
-//   );
-// }
 
 interface IForm {
   toDo: string;
-  email: string;
-  firstName: string;
-  lastName?: string;
-  password: string;
-  passwordCheck: string;
-  extraError?: string;
 }
 
+interface IToDo {
+  text: string;
+  id: number;
+  category: "TO_DO" | "DOING" | "DONE";
+}
+
+const toDoState = atom<IToDo[]>({
+  key: "toDo",
+  default: [],
+});
+
 function ToDoList() {
+  const [toDos, setToDos] = useRecoilState(toDoState);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-  } = useForm<IForm>({ defaultValues: { email: "@naver.com" } });
-  const onValid = (data: IForm) => {
-    if (data.password !== data.passwordCheck) {
-      setError(
-        "passwordCheck",
-        { message: "비밀번호가 틀려요!" },
-        { shouldFocus: true }
-      );
-      console.log("it work");
-    }
-    // setError("extraError", { message: "server offline" });
+    setValue,
+  } = useForm<IForm>();
+  const onValid = ({ toDo }: IForm) => {
+    setValue("toDo", "");
+    setToDos((oldToDos) => [
+      { text: toDo, category: "TO_DO", id: Date.now() },
+      ...oldToDos,
+    ]);
   };
-  console.log(errors);
   return (
     <TodoWrap>
       <form onSubmit={handleSubmit(onValid)}>
         <input
           {...register("toDo", {
-            required: "할 일을 작성해 주세요😥",
+            required: "할 일이..없으신가요...?있다면 작성해주세요🥺",
           })}
-          placeholder="Write a to do"
+          placeholder="할 일"
         />
         <span>{errors?.toDo?.message as string}</span>
-        <input
-          {...register("email", {
-            required: "이메일을 입력해 주세요",
-            minLength: { value: 6, message: "too short" },
-            pattern: {
-              value: /^[A-Za-z0-9._%+-]+@naver.com$/,
-              message: "이메일은 naver만 가능합니다",
-            },
-          })}
-        />
-        <span>{errors?.email?.message as string}</span>
-        <input
-          {...register("firstName", {
-            required: "성함을 입력해 주세요",
-          })}
-          placeholder="First name"
-        />
-        <span>{errors?.firstName?.message as string}</span>
-        <input {...register("lastName")} placeholder="Last name" />
-        <input
-          {...register("password", {
-            required: "비밀번호를 입력해 주세요",
-            minLength: { value: 6, message: "6글자 이상 입력해 주세요" },
-          })}
-          placeholder="Pw"
-        />
-        <span>{errors?.password?.message as string}</span>
-        <input
-          {...register("passwordCheck", {
-            required: "올바른 비밀번호를 입력해 주세요",
-          })}
-          placeholder="Pw Check"
-        />
-        <span>{errors?.passwordCheck?.message as string}</span>
         <button>Add</button>
-        <span>{errors?.extraError?.message}</span>
       </form>
+      <ul>
+        {toDos.map((toDo) => (
+          <li key={toDo.id}>{toDo.text}</li>
+        ))}
+      </ul>
     </TodoWrap>
   );
 }
