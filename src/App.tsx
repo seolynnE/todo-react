@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalStyle from "./atom/GlobalStyle";
-import ToDoList from "./pages/ToDoList";
+import ToDoList from "./components/ToDoList";
 
 function App() {
   return (
