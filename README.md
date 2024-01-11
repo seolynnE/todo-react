@@ -44,3 +44,14 @@
         value.includes("cat") ? "no cat allowd" : true,<br />
   }} /><br />
 <br /><br />
+
+**2.Recoil**
+<br />
+- atom의 값을 얻을 때 : useRecoilValue()
+  atom의 값을 변경할 때 : useSetRecoilState() /react의 setState함수와 똑같이 동작한다.
+<br /><br />
+**3.onClick Event**
+<br />
+- 두 가지 방법이 있다.
+- const onClick = (newCategory: IToDo["category"]) => {};  {category !== "DOING" && (<button onClick={() => onClick("DOING")>Doing</button>)} : 인자를 받는 함수를 직접 만들어, 새 익명 함수를 선언해 인자를 넘겨주는 방법
+- const onClick = (event: React.MouseEvent<HTMLButtonElement>) => { const {currentTarget: {name}} = event;};  {category !== "DOING" && (<button name="DOING" onClick={onClick}>Doing</button>)} : name을 활용해 넘겨주는 방법
