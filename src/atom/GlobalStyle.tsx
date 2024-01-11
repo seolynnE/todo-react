@@ -63,6 +63,7 @@ a{
 }
 button{
   border: none;
+    background-color: inherit;
   cursor: pointer;
 }
 input:focus{

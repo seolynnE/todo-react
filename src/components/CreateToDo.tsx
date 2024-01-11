@@ -1,6 +1,28 @@
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { toDoState } from "./iToDo";
+import styled from "styled-components";
+
+const FormWrap = styled.form`
+  display: flex;
+  input {
+    width: -webkit-fill-available;
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: inherit;
+    color: #fff;
+    font-size: 20px;
+  }
+  button {
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 22px;
+    &:hover {
+      background-color: #fff;
+      color: ${(props) => props.theme.bgColor};
+    }
+  }
+`;
 interface IForm {
   toDo: string;
 }
@@ -16,7 +38,7 @@ function CreateToDo() {
     ]);
   };
   return (
-    <form onSubmit={handleSubmit(onValid)}>
+    <FormWrap onSubmit={handleSubmit(onValid)}>
       <input
         {...register("toDo", {
           required: "할 일이..없으신가요...?있다면 작성해주세요🥺",
@@ -25,7 +47,7 @@ function CreateToDo() {
       />
       {/* <span>{errors?.toDo?.message as string}</span> */}
       <button>Add</button>
-    </form>
+    </FormWrap>
   );
 }
 

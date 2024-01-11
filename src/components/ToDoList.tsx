@@ -13,11 +13,6 @@ const TodoWrap = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 60px 40px;
-  form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
 `;
 
 function ToDoList() {
