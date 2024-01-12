@@ -63,7 +63,9 @@
 - 원소 교체 이유 : 원소의 위치를 바꾸지 않으려고
 - 1. 배열을 만들어주자
 <br />
-``` const color = ["red", "blue", "black", "orange", "white"]; ```
+```
+const color = ["red", "blue", "black", "orange", "white"];
+```
 <br />
 여기서 blue를 지우고 pink로 바꾸고 싶다고 예시를 들어보자. ("추가"가 아니다.)
 <br />
@@ -71,23 +73,28 @@
 <br />
 'blue'의 앞과 뒤로 나누는 거다. 예를 들면 이런식으로 만들어진다.
 <br />
-``` const front = ["red"];
+```
+const front = ["red"];
 <br />
 const back = ["black", "orange", "white"];
 <br />
-const finalPart = [...front, "pink" , ...back]; ```
+const finalPart = [...front, "pink" , ...back];
+```
 <br />
 여기서 '...front'의 '...'는  front 안에 있는 모든 원소를 풀어놓는다는 의미다.
 <br />
 만약 [front, "pink" , ...back] 이렇게 작성하면, 아래의 의미와 같다.
 <br />
-``` [["red"], "pink" , "black", "orange", "white"]; ```
+``` 
+[["red"], "pink" , "black", "orange", "white"];
+```
 <br />
 배열 안에 배열을 넣고싶은 것이 아니라면 "..."을 붙여주도록 하자.
 <br />
 하지만 이렇게 했는데 배열을 바꾸면 말짱 도로묵 아님? 맞음ㅎ; 이렇게 해보자
 <br />
-``` const color = ["red", "blue", "black", "orange", "white"];
+```
+const color = ["red", "blue", "black", "orange", "white"];
 <br />
 const target = 1; // blue
 color.slice(0, 1) // index 0부터 1이전까지 잘라줘! -> "red"
@@ -95,6 +102,7 @@ color.slice(0, 1) // index 0부터 1이전까지 잘라줘! -> "red"
 color.slice(target+1); // target에서 1을 더한 곳까지 잘라줘! -> "black", "orange", "white"
 <br />
 // 합쳐보자!
-[...color.slice(0, target), "pink" , ...color.slice(target+1)] ```
+[...color.slice(0, target), "pink" , ...color.slice(target+1)]
+```
 <br />
 요 방법을 활용해 To Do List의 버튼 클릭 시 변환되는 기능을 만들어 봤다.
