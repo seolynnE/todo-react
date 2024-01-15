@@ -135,14 +135,16 @@ color.slice(target+1); // target에서 1을 더한 곳까지 잘라줘! -> "blac
 요 방법을 활용해 To Do List의 버튼 클릭 시 변환되는 기능을 만들어 봤다.
 
 **5.enum**
-- enum(enumerable)은 반복되는 아이들을 묶어서 관리 해 줄 수 있다.
+- enum(enumerable)은 반복되는 아이들을 묶어서 관리 해 줄 수 있다. 반복되는 값들은 나를 불안하게 하니까 묶어서 관리해줘야한다.
 - 사용 예시
 ```
 export enum Categories {
-  "TO_DO",
-  "DOING",
-  "DONE"
+  "TO_DO" = "TO_DO",
+  "DOING" = "DOING",
+  "DONE" = "DONE",
 }
+// "DONE" = "DONE"  이런 식으로 해주는 이유는, enum을 생성할 때 숫자로 생성되기 때문에 숫자를 이름으로 바꾼다고 생각하면 편하다.
+// 원래는 2 = "DONE" 이런 셈이다.
 
 export interface IToDo {
   text: string;
