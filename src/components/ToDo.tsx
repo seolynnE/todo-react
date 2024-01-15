@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IToDo, toDoState } from "./iToDo";
+import { Categories, IToDo, toDoState } from "./iToDo";
 import { useSetRecoilState } from "recoil";
 
 const ToDoLi = styled.li`
@@ -44,18 +44,18 @@ function ToDo({ text, category, id }: IToDo) {
     <ToDoLi>
       <span>{text}</span>
       <div>
-        {category !== "DOING" && (
-          <button name="DOING" onClick={onClick}>
+        {category !== Categories.DOING && (
+          <button name={Categories.DOING} onClick={onClick}>
             Doing
           </button>
         )}
-        {category !== "TO_DO" && (
-          <button name="TO_DO" onClick={onClick}>
+        {category !== Categories.TO_DO && (
+          <button name={Categories.TO_DO} onClick={onClick}>
             To Do
           </button>
         )}
-        {category !== "DONE" && (
-          <button name="DONE" onClick={onClick}>
+        {category !== Categories.DONE && (
+          <button name={Categories.DONE} onClick={onClick}>
             Done
           </button>
         )}
