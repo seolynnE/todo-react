@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 const FormWrap = styled.form`
   display: flex;
+  margin-bottom: 10px;
   input {
     width: -webkit-fill-available;
     border: none;

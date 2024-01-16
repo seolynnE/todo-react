@@ -6,19 +6,25 @@ import { useSetRecoilState } from "recoil";
 const ToDoLi = styled.li`
   display: flex;
   justify-content: space-between;
-  margin-top: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #616161;
   font-size: 18px;
   span {
     width: calc(100% - 158px);
   }
-  button {
-    margin-left: 4px;
-    border: 1px solid #fff;
-    background-color: inherit;
-    color: #fff;
-    &:hover {
-      background-color: #fff;
-      color: ${(props) => props.theme.bgColor};
+  .btn-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: 4px;
+    button {
+      border: 1px solid #fff;
+      background-color: inherit;
+      color: #fff;
+      &:hover {
+        background-color: #fff;
+        color: ${(props) => props.theme.bgColor};
+      }
     }
   }
 `;
@@ -39,11 +45,14 @@ function ToDo({ text, category, id }: IToDo) {
       ];
     });
   };
+  const onDelete = () => {
+    setToDos((oldToDos) => oldToDos.filter((toDo) => toDo.id !== id));
+  };
 
   return (
     <ToDoLi>
       <span>{text}</span>
-      <div>
+      <div className="btn-wrap">
         {category !== Categories.DOING && (
           <button name={Categories.DOING} onClick={onClick}>
             Doing
@@ -59,6 +68,7 @@ function ToDo({ text, category, id }: IToDo) {
             Done
           </button>
         )}
+        <button onClick={onDelete}>Delete</button>
       </div>
     </ToDoLi>
   );

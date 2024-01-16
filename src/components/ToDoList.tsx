@@ -1,5 +1,5 @@
 import React from "react";
-import { selector, useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import CreateToDo from "./CreateToDo";
 import { Categories, categoryState, toDoSelector, toDoState } from "./iToDo";
@@ -42,6 +42,7 @@ const TodoWrap = styled.div`
 function ToDoList() {
   const toDos = useRecoilValue(toDoSelector);
   const [category, setCategory] = useRecoilState(categoryState);
+
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
   };
