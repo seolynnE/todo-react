@@ -73,10 +73,11 @@
 <br />
 
 **selector**
-
 <br />
 - atom의 output을 변경시키는 도구
+<br />
 - atom은 단순히 배열이고, 이 atom의 output을 변경시키는게 selector다.
+<br />
 - 사용 예시
   
 ```javascript
