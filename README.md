@@ -71,13 +71,15 @@
   atom의 값을 변경할 때 : useSetRecoilState() /react의 setState함수와 똑같이 동작한다.
   useRecoilState는 값과 더불어 modifier 함수도 제공
 <br />
+
 **selector**
+
 <br />
 - atom의 output을 변경시키는 도구
 - atom은 단순히 배열이고, 이 atom의 output을 변경시키는게 selector다.
 - 사용 예시
-- 
-  ```javascript
+  
+```javascript
   // atom.tsx
   import {atom, selector} from "recoil"
 
@@ -100,7 +102,7 @@
 
   // 사용할tsx
   const selectorOutPut = useRecoilValue(toDoSelector);
-  ```
+```
 
 <br /><br />
 
