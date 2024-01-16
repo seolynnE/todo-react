@@ -157,3 +157,40 @@ export const categoryState = atom<Categories>({
   default: Categories.TO_DO,
 });
 ```
+<br /><br />
+
+**6.Delete button**
+<br />
+- 선택된 요소를 포함시키지 않고 리턴하는 방식을 사용했다.
+```javascript
+const setToDos = useSetRecoilState(toDoState);
+
+const onDelete = () => {
+  setToDos((oldToDos) => oldToDos.filter((toDo) => toDo.id !== id));
+};
+```
+- oldToDos.filter(...) : toDos 배열에서 특정 조건을 만족하는 항목만 남기고 나머지는 필터링 해준다.
+- (toDo) => toDo.id !== id : 현재 처리 중인 ToDo항목의 id가 삭제하려는 항목의 id와 일치하지 않는 경우에만 남는다.
+
+<br /><br />
+
+**7.데이터 저장: Recoil의 persist**
+<br />
+- localStorage를 사용해 JSON 으로 세팅하는 방법으로 해보려다가, Recoil 에서도 처리할 수 있는 방법이 있어서 사용해 봤다. 매우 간편!감동실화!
+- 참고 사이트 : https://www.npmjs.com/package/recoil-persist
+- 결과적으로 원래 작성했던 코드 중 하단의 코드만 더해주면 간단하게 끝났다.
+```javascript
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist({
+  key: "toDoPersist",
+  storage: localStorage,
+});
+
+export const toDoState = atom<IToDo[]>({
+  key: "toDo",
+  default: [],
+  // 기존 코드에서 아래 한 줄만 추가!
+  effects_UNSTABLE: [persistAtom],
+});
+```
